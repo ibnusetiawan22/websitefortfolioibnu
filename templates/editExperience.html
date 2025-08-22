@@ -1,0 +1,38 @@
+{% include 'headerAdmin.html' %}
+<main id="main" class="main bg-white">
+  <div class="pagetitle">
+    <h1>Edit Experience</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+        <li class="breadcrumb-item active">Edit Experience</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <div class="card border-0 shadow mb-4">
+    <div class="card-body">
+      <form action="{{ url_for('edit_experience', _id=data._id) }}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_id" value="{{ data._id }}">
+        <div class="mb-3">
+          <label for="nama" class="form-label">Judul Experience</label>
+          <input type="text" class="form-control" id="nama" name="nama" value="{{ data.nama }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="deskripsi" class="form-label">Deskripsi</label>
+          <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required>{{ data.deskripsi }}</textarea>
+        </div>
+        <div class="mb-3">
+          <label for="gambar" class="form-label">Gambar</label>
+          <input class="form-control" type="file" id="gambar" name="gambar" accept="image/*">
+          {% if data.gambar %}
+          <img src="{{ url_for('static', filename='imgExperience/' + data.gambar) }}" alt="Gambar Experience" style="width: 100px; height: 100px; object-fit: cover; margin-top: 10px;">
+          {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+      </form>
+    </div>
+  </div>
+</main><!-- End #main -->
+
+{% include 'footerAdmin.html' %}
